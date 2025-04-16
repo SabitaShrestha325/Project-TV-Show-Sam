@@ -1,3 +1,84 @@
+:root {
+  --card-width: 300px; /* Card width */
+  --card-height: 450px; /* Card height */
+  --gap: 20px; /* Space between cards */
+}
+
 #root {
-  color: red;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Dynamic column count */
+  gap: var(--gap); /* Space between cards */
+  padding: 20px;
+  max-width: 100%; /* Make sure the grid takes up full screen width */
+}
+
+.episode-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  padding: 10px;
+}
+
+.episode-card img {
+  width: 100%;
+  height: auto;
+  max-height: 200px; /* Limit image height */
+  object-fit: cover; /* Make sure the image covers the card area */
+  display: block;
+}
+
+.episode-card h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.episode-card .episode-code {
+  font-weight: bold;
+  color: #666;
+}
+
+.episode-card .summary {
+  font-size: 0.9em;
+  color: #333;
+  margin-top: 10px;
+}
+
+.episode-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #0066cc;
+  font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+  #root {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(250px, 1fr)
+    ); /* Adjust based on screen width */
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); /* 1-2 columns on smaller screens */
+  }
+}
+/* Footer styles */
+#footer {
+  /* background-color: #333;
+  color: white; */
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+  margin-top: auto; /* This ensures footer stays at the bottom */
 }
