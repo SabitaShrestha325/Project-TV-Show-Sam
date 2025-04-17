@@ -9,6 +9,18 @@
   </head>
 
   <body>
+    <div id="controls">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search episodes by name or summary..."
+      />
+      <select id="episodeSelector">
+        <option value="all">Show All Episodes</option>
+      </select>
+      <p id="searchCount">Displaying 0 / 0 episodes</p>
+    </div>
+
     <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
