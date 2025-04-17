@@ -1,38 +1,70 @@
 :root {
-  --card-width: 300px; /* Card width */
-  --card-height: 450px; /* Card height */
-  --gap: 20px; /* Space between cards */
-  --background-color: #000000;
-  --card-background: #1a1a1a;
-  --text-color: #f3e5f5;
-  --accent-pink: #bca4f3;
-  --link-color: #bca4f3;
+  --background-color: #000; /* Pure black background */
+  --card-background: #1a1a1a; /* Dark gray for cards */
+  --text-color: #f8eafa; /* Light pink-ish text for good contrast */
+  --accent-pink: #a86cdc; /* Vibrant pink for highlights */
+  --muted-text: #cccccc; /* For episode codes */
+  --link-color: #c289eb; /* Hot pink for links */
+  --font-family: "Dosis", sans-serif;
+  --card-radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --gap: 20px;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: "Poppins", sans-serif; /* Feel free to change font */
   margin: 0;
   padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+  background-color: #111;
+}
+
+#searchInput,
+#episodeSelector {
+  background-color: #1f1f1f;
+  color: var(--text-color);
+  border: 1px solid var(--accent-pink);
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+#searchCount {
+  color: var(--muted-text);
+  font-size: 0.95em;
 }
 
 #root {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--gap);
-  padding: 20px;
-  max-width: 100%;
+  padding: 30px;
 }
 
 .episode-card {
-  border: 1px solid #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
   background-color: var(--card-background);
-  padding: 10px;
   color: var(--text-color);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  transition: transform 0.2s ease;
+}
+
+.episode-card:hover {
+  transform: scale(1.02);
 }
 
 .episode-card img {
@@ -40,76 +72,59 @@ body {
   height: auto;
   max-height: 200px;
   object-fit: cover;
-  display: block;
+  border-radius: 8px;
 }
 
 .episode-card h2 {
-  font-size: 1.2em;
-  margin: 10px 0;
+  font-size: 1.1rem;
+  margin: 12px 0 5px;
   color: var(--text-color);
 }
 
-.episode-card .episode-code {
+.episode-code {
   font-weight: bold;
-  color: #bbb;
+  color: var(--muted-text);
 }
 
-.episode-card .summary {
-  font-size: 0.9em;
-  color: var(--text-color);
+.summary {
+  font-size: 0.9rem;
   margin-top: 10px;
+  color: var(--text-color);
 }
 
 .episode-card a {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: underline;
+  margin-top: auto;
   color: var(--link-color);
+  text-decoration: underline;
   font-weight: bold;
-}
-
-#search-input,
-#episode-selector {
-  background-color: #111111;
-  color: var(--text-color);
-  border: 1px solid var(--accent-pink);
-  padding: 6px;
-  border-radius: 4px;
-  margin: 0 5px;
+  display: inline-block;
 }
 
 #show-all-button {
   background-color: transparent;
-  border: none;
   color: var(--link-color);
   text-decoration: underline;
+  border: none;
   cursor: pointer;
   font-size: 1em;
-  font-family: inherit;
-  margin-top: 1rem;
+  margin: 20px auto;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  background: var(--background-color); /* Ensures it blends */
-}
-
-@media (max-width: 1200px) {
-  #root {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  #root {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
 }
 
 #footer {
   text-align: center;
-  padding: 10px;
+  padding: 15px;
+  background-color: #111;
+  color: var(--muted-text);
   font-size: 0.9em;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  #controls {
+    flex-direction: column;
+  }
+
+  #root {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }
