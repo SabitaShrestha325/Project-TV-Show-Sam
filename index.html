@@ -17,17 +17,26 @@
 
   <body>
     <div id="controls">
-      <input type="text" id="searchInput" placeholder="Search Episodes" />
-      <select id="episodeSelector">
-        <option value="all">Show All Episodes</option>
+      <!-- Show Selector -->
+      <label for="showSelector">Select Show:</label>
+      <select id="showSelector">
+        <option value="">Select a show</option>
       </select>
+
+      <!-- Episode selector-->
+      <label for="episodeSelector">Select Episode:</label>
+      <select id="episodeSelector">
+        <option value="all">All Episodes</option>
+      </select>
+      <!-- Search bar -->
+      <input type="text" id="searchInput" placeholder="Search episodes..." />
+
       <p id="searchCount">Displaying 0 / 0 episodes</p>
     </div>
 
     <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
 
     <p id="footer">
       Data provided by
