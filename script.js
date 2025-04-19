@@ -1,13 +1,45 @@
 let allEpisodes = []; // make global variable to store all episodes
 //You can edit ALL of the code here
 
-function setup() {
-  allEpisodes = getAllEpisodes(); // now assigned to the global variable
-  setupSearch(); // Setup search functionality
-  setupSelector(); // Setup episode selector functionality
-  populateEpisodeSelector(allEpisodes);
-  makePageForEpisodes(allEpisodes); // fill dropdown
-}
+//Moving window.onload to top to fetch episodes from the API once when the page loads
+window.onload = () => {
+  //To show a loading message while the fetch is in progress
+  document.getElementById("root").innerHTML = "<p>Loading episodes...</p>";
+
+  //Fetching all episode data from the TVmaze API
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((response) => {
+      if (!response.ok) {
+        //To throw an error if the response status is not OK
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json(); //Parse the JSON from the response
+    })
+    .then((data) => {
+      allEpisodes = data; //To store the fetched episodes globally
+      makePageForEpisodes(allEpisodes); // fill dropdown
+      setupSearch(); // Setup search functionality
+      setupSelector(); // Setup episode selector functionality
+      populateEpisodeSelector(allEpisodes);
+    })
+    .catch((error) => {
+      // show a user-friendly error message if the fetch fails
+      document.getElementById("root").innerHTML =
+        "<p style='color: pink;'>Failed to load episodes. Please try again later.</p>";
+      console.error("Error fetching episodes:", error);
+    });
+};
+
+//The setup() function was only useful when using static data.
+// Now that the data comes from an asynchronous fetch request,s the function is no longer needed.
+
+// function setup() {
+//   allEpisodes = getAllEpisodes(); // now assigned to the global variable
+//   setupSearch(); // Setup search functionality
+//   setupSelector(); // Setup episode selector functionality
+//   populateEpisodeSelector(allEpisodes);
+//   makePageForEpisodes(allEpisodes); // fill dropdown
+// }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -104,5 +136,3 @@ function setupSelector() {
     }
   });
 }
-
-window.onload = setup;
