@@ -78,20 +78,13 @@ body {
 .episode-card h2 {
   font-size: 1.1rem;
   margin: 12px 0 5px;
-  color: var(--text-color);
 }
 
-.episode-code {
-  font-weight: bold;
-  color: var(--muted-text);
-}
-
+.episode-code,
 .summary {
+  color: var(--muted-text);
   font-size: 0.9rem;
-  margin-top: 10px;
-  color: var(--text-color);
 }
-
 .episode-card a {
   margin-top: auto;
   color: var(--link-color);
