@@ -125,7 +125,9 @@ function makePageForEpisodes(episodeList) {
 
     //Creating the episode image
     const image = document.createElement("img");
-    image.src = episode.image.medium;
+    image.src =
+      episode.image?.medium ||
+      "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png"; // Placeholder if image fails to load
     image.alt = `${episode.name} image`;
 
     //Adding the episode summary
@@ -240,7 +242,9 @@ function displayAllShows(showList) {
     title.textContent = show.name;
 
     const image = document.createElement("img");
-    image.src = show.image?.medium || "";
+    image.src =
+      episode.image?.medium ||
+      "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png"; // Placeholder if image fails to load
     image.alt = `${show.name} image`;
 
     const summary = document.createElement("div");
