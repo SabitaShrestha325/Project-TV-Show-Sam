@@ -242,7 +242,7 @@ function displayAllShows(showList) {
     image.alt = `${show.name} image`;
 
     const summary = document.createElement("div");
-    summary.innerHTML = show.summary;
+    summary.innerHTML = show.summary || "<p>No summary available.</p>";
 
     const button = document.createElement("button");
     button.textContent = "View Episodes";
