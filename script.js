@@ -185,7 +185,7 @@ function setupSearch() {
 }
 
 // This function will update the text that shows how many episodes are currently  displayed
-function updateSearchCount(current, total) {
+function updateSearchCount(current, total, type = "episodes") {
   const searchCount = document.getElementById("searchCount");
   searchCount.textContent = `Displaying ${current} / ${total} episodes`;
 }
@@ -252,6 +252,8 @@ function displayAllShows(showList) {
   isShowingEpisodes = false;
   const root = document.getElementById("root");
   root.innerHTML = ""; // Clear loading or previous content
+  const searchCount = document.getElementById("searchCount");
+  searchCount.textContent = `Displaying ${showList.length} / ${allShows.length} shows`;
 
   const showCards = showList.map((show) => {
     const card = document.createElement("div");
