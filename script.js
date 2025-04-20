@@ -2,6 +2,7 @@ let allEpisodes = [];
 const episodeCache = {};
 const showCache = {};
 let isShowingEpisodes = false;
+let currentView = "shows";
 
 window.onload = () => {
   const root = document.getElementById("root");
@@ -26,6 +27,8 @@ window.onload = () => {
 };
 
 function loadShowEpisodes(showId) {
+  currentView = "episodes";
+  toggleViewElements();
   isShowingEpisodes = true;
   const root = document.getElementById("root");
   root.innerHTML = "<p>Loading episodes...</p>";
@@ -122,7 +125,8 @@ function setupSearch() {
       const filtered = allShows.filter((show) => {
         return (
           show.name.toLowerCase().includes(term) ||
-          (show.summary && show.summary.toLowerCase().includes(term))
+          (show.summary && show.summary.toLowerCase().includes(term)) ||
+          show.genres.some((genre) => genre.toLowerCase().includes(term))
         );
       });
       displayAllShows(filtered);
@@ -191,9 +195,15 @@ function populateShowDropdown(shows) {
 }
 
 function displayAllShows(showList) {
+  currentView = "shows";
+  toggleViewElements();
   isShowingEpisodes = false;
   const root = document.getElementById("root");
   root.innerHTML = "";
+
+  document.getElementById("showSelector").value = "all";
+  document.getElementById("episodeSelector").value = "all";
+
   const searchCount = document.getElementById("searchCount");
   searchCount.textContent = `Displaying ${showList.length} / ${allShows.length} shows`;
 
@@ -259,5 +269,23 @@ function clearSearchBar() {
   const searchInput = document.getElementById("searchInput");
   if (searchInput) {
     searchInput.value = "";
+    searchInput.dispatchEvent(new Event("input"));
   }
+}
+
+function toggleViewElements() {
+  const navLink = document.getElementById("navLink");
+  const episodeSelector = document.getElementById("episodeSelector");
+  const showSelector = document.getElementById("showSelector");
+
+  navLink.style.display = currentView === "episodes" ? "block" : "none";
+  episodeSelector.style.display = currentView === "episodes" ? "block" : "none";
+  showSelector.style.display = currentView === "shows" ? "block" : "none";
+}
+
+function returnToShows() {
+  displayAllShows(allShows);
+  const searchInput = document.getElementById("searchInput");
+  searchInput.value = "";
+  searchInput.dispatchEvent(new Event("input")); // Trigger search update
 }
