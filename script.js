@@ -1,6 +1,8 @@
 let allEpisodes = []; // make global variable to store all episodes
 const episodeCache = {}; // Cache to avoid multiple fetches
 const showCache = {}; //if you want to cache the show data as well
+let allShows = [];
+let isShowingEpisodes = false;
 //You can edit ALL of the code here
 
 //Moving window.onload to top to fetch episodes from the API once when the page loads
@@ -12,11 +14,13 @@ window.onload = () => {
   fetch("https://api.tvmaze.com/shows")
     .then((res) => res.json())
     .then((shows) => {
+      allShows = shows;
       shows.sort((a, b) =>
         a.name.toLowerCase().localeCompare(b.name.toLowerCase())
       );
       populateShowDropdown(shows);
       displayAllShows(shows); // Display all shows in the dropdown
+      setupSearch();
     })
     .catch((err) => {
       console.error("Failed to fetch shows list:", err);
@@ -27,6 +31,7 @@ window.onload = () => {
 
 // Reusable function to fetch & display episodes for a show
 function loadShowEpisodes(showId) {
+  isShowingEpisodes = true;
   const root = document.getElementById("root");
   root.innerHTML = "<p>Loading episodes...</p>";
 
@@ -156,13 +161,24 @@ function setupSearch() {
   const searchInput = document.getElementById("searchInput");
   searchInput.addEventListener("input", (e) => {
     const term = e.target.value.toLowerCase();
-    const filtered = allEpisodes.filter((ep) => {
-      return (
-        ep.name.toLowerCase().includes(term) ||
-        ep.summary.toLowerCase().includes(term)
-      );
-    });
-    makePageForEpisodes(filtered);
+
+    if (isShowingEpisodes) {
+      const filtered = allEpisodes.filter((ep) => {
+        return (
+          ep.name.toLowerCase().includes(term) ||
+          ep.summary.toLowerCase().includes(term)
+        );
+      });
+      makePageForEpisodes(filtered);
+    } else {
+      const filtered = allShows.filter((show) => {
+        return (
+          show.name.toLowerCase().includes(term) ||
+          (show.summary && show.summary.toLowerCase().includes(term))
+        );
+      });
+      displayAllShows(filtered);
+    }
   });
 }
 
@@ -231,6 +247,7 @@ function populateShowDropdown(shows) {
 }
 
 function displayAllShows(showList) {
+  isShowingEpisodes = false;
   const root = document.getElementById("root");
   root.innerHTML = ""; // Clear loading or previous content
 
