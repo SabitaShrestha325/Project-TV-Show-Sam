@@ -250,6 +250,19 @@ function displayAllShows(showList) {
     const summary = document.createElement("div");
     summary.innerHTML = show.summary || "<p>No summary available.</p>";
 
+    //adding genres / status /rating and runtime
+    const genres = document.createElement("p");
+    genres.textContent = `Genres: ${show.genres.join(", ")}`;
+
+    const status = document.createElement("p");
+    status.textContent = `Status: ${show.status}`;
+
+    const rating = document.createElement("p");
+    rating.textContent = `Rating: ${show.rating?.average ?? "N/A"}`;
+
+    const runtime = document.createElement("p");
+    runtime.textContent = `Runtime: ${show.runtime} min`;
+
     const button = document.createElement("button");
     button.textContent = "View Episodes";
     button.addEventListener("click", () => {
@@ -257,7 +270,7 @@ function displayAllShows(showList) {
       loadShowEpisodes(show.id);
     });
 
-    card.append(title, image, summary, button);
+    card.append(title, image, summary, genres, status, rating, runtime, button);
     return card;
   });
 
