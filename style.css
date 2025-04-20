@@ -180,3 +180,11 @@ a:hover {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
+.clickable-title {
+  color: #a86cdc;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.clickable-title:hover {
+  color: #a974d1;
+}
