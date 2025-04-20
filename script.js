@@ -197,10 +197,10 @@ function populateShowDropdown(shows) {
   dropdown.innerHTML = ""; // Clear any existing options
 
   // Add a default placeholder option again
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "Select a show";
-  dropdown.appendChild(defaultOption);
+  const allShowsOption = document.createElement("option");
+  allShowsOption.value = "all";
+  allShowsOption.textContent = "All Shows";
+  dropdown.appendChild(allShowsOption);
 
   shows.forEach((show) => {
     const option = document.createElement("option");
@@ -211,8 +211,11 @@ function populateShowDropdown(shows) {
 
   dropdown.addEventListener("change", (e) => {
     const showId = e.target.value;
-    if (!showId) return;
-    loadShowEpisodes(showId); // Load episodes for the selected show
+    if (showId === "all") {
+      displayAllShows(shows);
+    } else if (showId) {
+      loadShowEpisodes(showId); // Load episodes for the selected show
+    }
   });
 }
 
