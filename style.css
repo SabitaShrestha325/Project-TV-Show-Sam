@@ -27,6 +27,7 @@ body {
   align-items: center;
   background-size: cover;
   background-position: center;
+  position: relative;
 }
 
 h1 {
@@ -36,7 +37,18 @@ h1 {
   text-shadow: 0 0 10px var(--accent-pink);
   font-size: 16vw;
   max-width: 80%;
+  margin: 0 auto;
   box-sizing: border-box;
+}
+#credit {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-style: italic;
+  color: var(--text-color);
+  text-shadow: 0 0 10px var(--accent-pink);
+  margin: 0;
+  padding: 0; /* Remove padding-top */
 }
 
 #controls {
