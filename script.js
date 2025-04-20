@@ -20,6 +20,8 @@ window.onload = () => {
     })
     .catch((err) => {
       console.error("Failed to fetch shows list:", err);
+      root.innerHTML =
+        "<p style='color: pink;'>Failed to load shows. Please try again later.</p>"; //Displays error message to the user
     });
 };
 
