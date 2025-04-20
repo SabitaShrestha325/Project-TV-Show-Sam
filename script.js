@@ -50,6 +50,7 @@ function loadShowEpisodes(showId) {
         episodeCache[showId] = episodes;
         allEpisodes = episodes;
         displayEpisodes(allEpisodes);
+        clearSearchBar();
       })
       .catch((err) => {
         root.innerHTML =
@@ -65,6 +66,7 @@ function displayEpisodes(episodes) {
   setupSearch();
   setupSelector();
   populateEpisodeSelector(episodes);
+  updateSearchPlaceholder();
 }
 
 //Fetching all episode data from the TVmaze API
@@ -298,4 +300,22 @@ function displayAllShows(showList) {
   });
 
   root.append(...showCards);
+  updateSearchPlaceholder();
+}
+
+function updateSearchPlaceholder() {
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    if (isShowingEpisodes) {
+      searchInput.placeholder = "Search Episodes...";
+    } else {
+      searchInput.placeholder = "Search Shows...";
+    }
+  }
+}
+function clearSearchBar() {
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.value = "";
+  }
 }
