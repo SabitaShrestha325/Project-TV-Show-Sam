@@ -99,6 +99,13 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = ""; // Clear previous content
 
+  //shows user message if search returns no results
+  if (episodeList.length === 0) {
+    rootElem.innerHTML =
+      "<p style='color: pink;'>No matching episodes found.</p>";
+    updateSearchCount(0, allEpisodes.length);
+    return;
+  }
   // Using .map() to generate episode cards and return them as an array
   const episodeCards = episodeList.map(function (episode) {
     // Creating the episode card container
