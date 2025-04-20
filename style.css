@@ -19,6 +19,26 @@ body {
   font-family: var(--font-family);
 }
 
+#header {
+  background-image: url("purpletheater.avif");
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 800;
+  color: var(--text-color);
+  text-shadow: 0 0 10px var(--accent-pink);
+  font-size: 16vw;
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
 #controls {
   display: flex;
   flex-wrap: wrap;
@@ -105,6 +125,7 @@ body {
   margin: 20px auto;
   display: block;
 }
+
 .show-card {
   background-color: var(--card-background);
   color: var(--text-color);
@@ -149,6 +170,7 @@ body {
   align-self: flex-start;
   font-weight: bold;
   margin-top: auto;
+  transition: background-color 0.3s ease;
 }
 
 .show-card button:hover {
@@ -162,13 +184,24 @@ body {
   color: var(--muted-text);
   font-size: 0.9em;
 }
+
 a {
   color: #8d5bcf;
   text-decoration: underline;
   font-weight: bold;
 }
+
 a:hover {
   color: #a974d1;
+}
+
+a:focus {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 2px;
+}
+
+a:active {
+  color: #7a4dbd;
 }
 
 @media (max-width: 768px) {
@@ -179,12 +212,30 @@ a:hover {
   #root {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
+
+  h1 {
+    font-size: 10vw; /* Adjusted responsive font size for smaller screens */
+  }
 }
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  h1 {
+    font-size: 7vw; /* Adjusted responsive font size for medium screens */
+  }
+}
+
+@media (min-width: 1201px) {
+  h1 {
+    font-size: 5em; /* Larger font size for desktop */
+  }
+}
+
 .clickable-title {
   color: #a86cdc;
   cursor: pointer;
   text-decoration: underline;
 }
+
 .clickable-title:hover {
   color: #a974d1;
 }
