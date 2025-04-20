@@ -28,7 +28,7 @@
     <div id="controls">
       <!-- Show Selector -->
       <label for="showSelector">Select Show:</label>
-      <select id="showSelector">
+      <select id="showSelector" aria-label="Select TV Show">
         <option value="">Select a show</option>
       </select>
 
@@ -38,7 +38,12 @@
         <option value="all">All Episodes</option>
       </select>
       <!-- Search bar -->
-      <input type="text" id="searchInput" placeholder="Search Shows..." />
+      <input
+        type="text"
+        id="searchInput"
+        aria-label="Search content"
+        placeholder="Search Shows..."
+      />
 
       <p id="searchCount">Displaying 0 / 0 episodes</p>
     </div>
