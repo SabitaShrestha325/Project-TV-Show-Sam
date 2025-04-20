@@ -240,6 +240,12 @@ function displayAllShows(showList) {
 
     const title = document.createElement("h2");
     title.textContent = show.name;
+    title.classList.add("clickable-title");
+
+    title.addEventListener("click", () => {
+      document.getElementById("showSelector").value = show.id;
+      loadShowEpisodes(show.id);
+    });
 
     const image = document.createElement("img");
     image.src =
