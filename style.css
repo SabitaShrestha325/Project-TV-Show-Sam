@@ -51,7 +51,9 @@ h1 {
 
 #searchInput,
 #episodeSelector,
-#showSelector {
+#showSelector,
+#navLink,
+#navLink button {
   background-color: #1f1f1f;
   color: var(--text-color);
   border: 1px solid var(--accent-pink);
